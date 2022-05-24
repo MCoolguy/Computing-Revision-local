@@ -19,12 +19,13 @@ def generate():
 # Inserting into database
 DATABASE = '../register.db'
 def refresh():
-    
+    pass
     
 def insert(data):
-   
+   pass
 
 def report():
+    pass
 
 #-----main program----
 refresh()

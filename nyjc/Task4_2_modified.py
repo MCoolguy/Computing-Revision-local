@@ -10,7 +10,7 @@ def initialise():
     file.close()
 
     # all SQL commands (split on ';')
-        sqlCommands = sqlFile.split(';')
+    sqlCommands = sqlFile.split(';')
 
     # Execute every command from the input file
     # This will skip and report errors
