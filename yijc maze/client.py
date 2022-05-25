@@ -1,19 +1,22 @@
-from http import client
 import socket 
 
 clientsocket = socket.socket()
-clientsocket.connect(('127.0.0.1',6789))
+clientsocket.connect(('127.0.0.1',12344))
 
 
 
 while True:
-    if '\n' in clientsocket.recv(1024).decode():
-        print(clientsocket.recv(1024).decode())
-    choice = input('Enter U(p), D(own), L(eft), R(ight) or Q(uit) : ').encode()
-    clientsocket.sendall(choice)
-    message = clientsocket.recv(1024).decode()
-    print(message)
+    data = clientsocket.recv(1024)
+    if b"Enter" in data:
+        choice = input(data.decode())
+        clientsocket.sendall(choice.encode())
     
+    else:
+        print(data.decode())
+        if b'Quit' or b'Prize' in data:
+            break
+        
+        
 
        
-clientsocket.close() 
+#clientsocket.close() 
