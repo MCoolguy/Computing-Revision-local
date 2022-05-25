@@ -1,46 +1,60 @@
-import flask
-from flask import request, render_template
-import sqlite3
+def bubblesort(lst):
+    n = len(lst)
+    for i in range(1,n):
+        for j in range(n-1):
+            if lst[j] > lst[j+1]:
+                lst[j],lst[j+1] = lst[j+1],lst[j]
+                
+    return lst
 
-def departments():
-    conn = sqlite3.connect("schools.db")
-    cur = conn.cursor()
-    cur.execute("SELECT DISTINCT Department FROM staff ORDER BY Department ASC")
-    rows = cur.fetchall()
-    department = []
-    for row in rows:
-        department.append(row[0])
-    conn.close()
-    return department
+list = [1,5,3,4,2,7]
+#print(bubblesort(list))
 
-def schools():
-    conn = sqlite3.connect("schools.db")
-    cur = conn.cursor()
-    cur.execute("SELECT DISTINCT Name FROM schools ORDER BY Name ASC")
-    rows = cur.fetchall()
-    schools = []
-    for row in rows:
-        schools.append(row[0])
-    conn.close()
-    return schools
+def insert(lst):
+    n = len(lst)
+    for i in range(1,n):
+        j = i 
+        while j>=0 and lst[j]<lst[j-1]:
+            lst[j],lst[j-1] = lst[j-1],lst[j]
+            j-=1
+            
+    return lst
 
-def search_html(school, department):
-    connection = sqlite3.connect("schools.db")
-    sql_statement = """
-                    SELECT schools.Name, staff.Name, staff.Department, staff.Contact, schools.Address
-                    FROM schools, staff
-                    WHERE staff.SchoolCode = schools.SchoolCode AND schools.Name LIKE ? AND staff.Department LIKE ?
-                    """
+#print(insert(list))
 
-    cur = connection.cursor()
-    cur.execute(sql_statement,('%'+school+'%',department))
-    rows = cur.fetchall()
-    results = []
-    for row in rows:
-        results.append(row)
-    print(results)
-    return results
+def mergesort(lst):
+    n = len(lst)
+    if n==1:
+        return lst
     
-school = schools()
-department = departments()
-print(department)
+    left = lst[:n//2]
+    right = lst[n//2:]
+    
+    left = mergesort(left)
+    right = mergesort(right)
+    
+    return merge(left,right)
+
+def merge(left,right):
+    finalst = []
+    while len(left)!=0 and len(right)!=0:
+        if left[0]>right[0]:
+            finalst.append(right[0])
+            right.pop(0)
+        else:
+            finalst.append(left[0])
+            left.pop(0)
+            
+    while len(left)!=0:
+            finalst.append(left[0])
+            left.pop(0)
+            
+    while len(right)!=0:
+        finalst.append(right[0])
+        right.pop(0)
+        
+        
+    return finalst
+print(mergesort(list))
+        
+        
