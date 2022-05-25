@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-<!-- this version is hardcoded without use of jinja2-->
 <table>
 	<tr>
 		<th>Name of school</th>
@@ -10,14 +9,7 @@
 	<tr>
 		<form action = "{{url_for('generate_report') }}" , method = "post">
 			<td>
-				<input list= "schools" ,name = "school">
-				<datalist id = "schools">
-				<select name = "school">
-					{% for school in schools%}
-						<option value = "{{school}}">
-					{%endfor%}
-				</select>
-				</datalist>
+				<input type = "text" name = "school">
 			</td>
 			<td>
 				<input list = "html_elements" name = "department">

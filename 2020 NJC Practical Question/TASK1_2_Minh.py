@@ -22,7 +22,7 @@ for data in file1read:
 counter = 0
 for i in range(listsize):
     #print(data1[0+counter],data1[1+counter],data1[2+counter])
-    conn.execute("INSERT INTO School(SchoolCode,Name,Address) VALUES(?,?,?)",(int(data1[0+counter]),data1[1+counter],data1[2+counter]))
+    conn.execute("INSERT INTO Schools(SchoolCode,Name,Address) VALUES(?,?,?)",(int(data1[0+counter]),data1[1+counter],data1[2+counter]))
     counter += 3
 
 #insertion into staff

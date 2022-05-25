@@ -38,33 +38,9 @@ def search_html(school, department):
     results = []
     for row in rows:
         results.append(row)
-    
+    print(results)
     return results
     
-
-app = flask.Flask(__name__)
-
-@app.route('/') #the items in the brackets create the links inside
-
-def home():
-    school = schools()
-    print(school)
-    return render_template('home.html', schools = school)
-
-
-
-@app.route('/result', methods = ['POST'])
-def generate_report():
-    if 'department' in request.form and 'school' in request.form:
-        #list to contain department and school
-        lst = []
-        lst.append(request.form['department'])
-        lst.append(request.form['school'])
-    department = lst[0]
-    school = lst[1]
-    result = search_html(school, department)
-    return render_template('results.html', result = result)
-
-
-if __name__ == '__main__':
-    app.run(port = 12358, debug = True)
+school = schools()
+department = departments()
+print(department)
